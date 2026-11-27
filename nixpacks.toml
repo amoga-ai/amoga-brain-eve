@@ -1,0 +1,3 @@
+# Installs the Docker command-line tool in the build, so `eve build` can prepare the Docker sandbox.
+[phases.setup]
+aptPkgs = ["docker-cli"]
