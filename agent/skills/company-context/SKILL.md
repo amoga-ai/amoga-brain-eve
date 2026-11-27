@@ -1,37 +1,19 @@
 ---
-description: Company names, teams, glossary, and where information lives. Load before answering questions that depend on company-specific terms, owners, or sources.
+description: How to answer company questions. Load before answering questions about the company, its products, policies, teams, or processes.
 ---
-
-<!--
-  Replace the example entries below with your company's details. Keep this file
-  short: it is loaded into context whenever the agent needs it. Move long
-  material into references/ files and link to them from here, or connect the
-  source system (Notion, Google Drive, Linear, ...) instead of copying it.
--->
 
 # Company context
 
-The entries below are examples. If a section still contains example text, tell
-the person that the company context has not been filled in yet instead of
-treating the examples as facts.
+## Where company answers come from
 
-## About the company
+1. For any company question, search the company documents first with the `search_company_docs` tool.
+2. Answer only from the sections it returns. Name the file each fact came from, for example "according to returns-process.md".
+3. If the search returns nothing, say that no company document covers the question. Don't guess.
 
-Example: Acme makes scheduling software for clinics. Headquarters are remote-first.
+## Test documents
+
+The files in the company documents folder are fictional sample files for Northwind Trail Co. They exist only to test this flow. If an answer comes from them, say that it comes from the sample test documents.
 
 ## Teams and owners
 
-| Team        | Owns                              | Where to ask   |
-| ----------- | --------------------------------- | -------------- |
-| Example Eng | Product, infrastructure, releases | `#example-eng` |
-| Example Ops | IT, accounts, access requests     | `#example-ops` |
-
-## Glossary
-
-- **Example term**: what it means here, and what it does not mean.
-
-## Where information lives
-
-- Policies and handbooks: example, the company wiki.
-- Project status: example, the issue tracker.
-- Decisions and discussion: Slack.
+Not filled in yet. If someone asks who owns something, say the owner isn't in the company documents yet.
