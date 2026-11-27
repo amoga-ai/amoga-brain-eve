@@ -1,14 +1,12 @@
+// Private notes for each signed-in person, stored on our server in MEMORY_DIR. Channel memory is removed for the AI chat.
 import { defineMemory } from "eve/memory";
 import { fileMemory } from "eve/memory/file";
 import { byPrincipal } from "eve/memory/scope";
-import { currentConversation } from "../lib/conversation.ts";
+import { fileBackend } from "../lib/file-backend.ts";
 
-// One document per person, available only in private conversations: Slack DMs
-// and non-Slack channels. It's off in shared Slack conversations so personal
-// notes never surface in a thread other people read.
 export default defineMemory({
   description:
     "Your private notes about the person you're talking with: their role, team, projects, and preferences. Only they see conversations that use it.",
-  provider: fileMemory(),
-  scope: (ctx) => (currentConversation(ctx)?.kind === "private" ? byPrincipal(ctx) : null),
+  provider: fileMemory({ backend: fileBackend(process.env.MEMORY_DIR ?? "/data/memory") }),
+  scope: byPrincipal,
 });

@@ -1,12 +1,10 @@
+// Runs the agent's code tools in a local Docker container on our server, instead of Vercel Sandbox.
 import { installCodeTooling } from "eve/extensions/code/sandbox";
 import { defineSandbox } from "eve/sandbox";
-import { VercelSandbox } from "eve/sandbox/vercel";
+import { DockerSandbox } from "eve/sandbox/docker";
 
-// Vercel Sandbox's mutable network policy lets `lib/github.ts` keep GitHub
-// tokens at the firewall instead of inside the sandbox. Locally it uses the
-// linked Vercel project's credentials from `vercel env pull`.
-export const environment = VercelSandbox.environment({
+export const environment = DockerSandbox.environment({
   prepare: (sandbox) => installCodeTooling(sandbox),
 });
 
-export default defineSandbox(() => environment.open());
+export default defineSandbox(() => environment.open({ networkPolicy: "deny-all" }));
